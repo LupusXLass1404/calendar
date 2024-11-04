@@ -1,0 +1,39 @@
+/* ============== 全局設定 ============== */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* ==============  ============== */
+
+body {
+    height: 100vh;
+    display: flex;
+}
+
+.container {
+    background-color: darkorange;
+    height: 640px;
+    width: 64vw;
+    margin: auto;
+}
+
+main {
+    background-color: deeppink;
+
+
+}
+
+aside {
+    background-color: deepskyblue;
+
+}
+
+footer {
+    background-color: darkcyan;
+    height: 40px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
