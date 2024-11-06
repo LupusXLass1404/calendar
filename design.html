@@ -9,13 +9,40 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
+<body class="month_11">
     <!-- .container>aside+main^footer -->
     <div class="container">
         <aside></aside>
-        <main></main>
+        <main>
+            <ul class="week">
+                <li>Sun.</li>
+                <li>Mon.</li>
+                <li>Tue.</li>
+                <li>Wed.</li>
+                <li>Thu.</li>
+                <li>Fri.</li>
+                <li>Sat.</li>
+            </ul>
+            <table id="dateTable" class="calendar"></table>
+        </main>
     </div>
     <footer></footer>
+
+    <script>
+        let td = "";
+
+        for (i = 0; i < 6; i++) {
+            td += "<tr>";
+            for (j = 0; j < 7; j++) {
+                td += `<td>${i * i + j}</td>`;
+            }
+            td += "</tr>"
+        }
+
+        document.getElementById('dateTable').innerHTML = td;
+    </script>
+
+
 </body>
 
 </html>

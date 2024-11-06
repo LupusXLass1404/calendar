@@ -12,28 +12,69 @@ body {
     display: flex;
 }
 
+
+/* ============== 容器 ============== */
 .container {
     background-color: darkorange;
     height: 640px;
     width: 64vw;
     margin: auto;
+    display: flex;
 }
 
 main {
+    width: 76%;
+    height: 100%;
     background-color: deeppink;
+    display: grid;
+}
 
+/* 日歷 */
+.week {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.week li {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.calendar {
+    width: 100%;
+    margin: 40px auto;
+    border-collapse: collapse;
 
 }
 
+.calendar td {
+    padding: 20px;
+    border: 1px solid #000;
+    background-color: darkcyan;
+}
+
+/* 側邊欄 */
 aside {
+    width: 24%;
+    height: 100%;
     background-color: deepskyblue;
 
 }
 
+
+/* ============== 頁尾 ============== */
 footer {
+    margin-top: 40px;
     background-color: darkcyan;
     height: 40px;
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+/* ============== 主題色 ============== */
+
+.month_11 {
+    background-image: url(./images/month_11.jpg);
 }
