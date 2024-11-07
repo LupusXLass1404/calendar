@@ -97,46 +97,48 @@ aside>div {
     margin: 32px 0;
 }
 
-.timeBox,
-.quotation {
-
-    border-radius: 16px;
-}
-
 /* 顯示時間 */
 .timeBox p {
     margin: 16px;
+    font-family: "Roboto", sans-serif;
 }
 
 .timeBox .yearMonth {
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .timeBox .day {
-    font-size: 4em;
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.timeBox .day .ordinal {
+    font-size: 2rem;
 }
 
 .timeBox .week {
-    font-size: 1.5em;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .timeBox .time {
-    font-size: 1em;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 /* 引文 */
 .quotation .mark {
-    font-size: 8em;
+    font-size: 8rem;
 }
-
 
 /* ============== 頁尾 ============== */
 footer {
     width: 100%;
     padding: 16px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
-    font-size: 0.9em;
+    font-size: 0.8rem;
     text-align: center;
     margin-top: 40px;
     position: fixed;
