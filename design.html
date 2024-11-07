@@ -39,7 +39,7 @@
 
         </aside>
 
-        <main>
+        <main id="main">
             <div class="buttons">
                 <div class="change">
                     《 Previous month </div>
@@ -52,21 +52,39 @@
                     Next month 》
                 </div>
             </div>
-            <ul class="weekList">
-                <li>Sun.</li>
-                <li>Mon.</li>
-                <li>Tue.</li>
-                <li>Wed.</li>
-                <li>Thu.</li>
-                <li>Fri.</li>
-                <li>Sat.</li>
-            </ul>
-            <table id="dateTable" class="calendar"></table>
+            <div class="calendar">
+                <ul class="weekList">
+                    <li>Sun.</li>
+                    <li>Mon.</li>
+                    <li>Tue.</li>
+                    <li>Wed.</li>
+                    <li>Thu.</li>
+                    <li>Fri.</li>
+                    <li>Sat.</li>
+                </ul>
+                <table id="dateTable" class="calendarTable"></table>
+            </div>
+            <div class="bottomButton">
+                <span id="return" class="button">Return</span>
+            </div>
         </main>
+        <div class="changeTime"></div>
     </div>
     <footer></footer>
 
     <script>
+
+        function init() {
+
+        }
+
+        function changeTime() {
+
+
+        }
+
+        init()
+
         let td = "";
 
         for (i = 0; i < 6; i++) {

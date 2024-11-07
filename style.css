@@ -33,7 +33,8 @@ main {
 }
 
 .buttons,
-.weekList {
+.weekList,
+.bottomButton {
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -43,9 +44,10 @@ main {
     margin: 40px;
 }
 
-.choose .button {
-    padding: 20px;
+.button {
+    border-radius: 8px;
     background-color: aqua;
+    padding: 20px;
 }
 
 .weekList li {
@@ -53,17 +55,22 @@ main {
     margin: 20px auto;
 }
 
-.calendar {
+.calendarTable {
     width: 100%;
     margin: 40px auto;
     border-collapse: collapse;
 
 }
 
-.calendar td {
+.calendarTable td {
     padding: 20px;
     border: 1px solid #000;
     background-color: darkcyan;
+}
+
+.bottomButton {
+    justify-content: end;
+    margin: 0 40px;
 }
 
 /* 側邊欄 */
