@@ -13,15 +13,18 @@ body {
 }
 
 
-/* ============== 容器 ============== */
+/* ============== 主要 ============== */
 .container {
     background-color: darkorange;
+    border-radius: 16px;
     height: 640px;
     width: 64vw;
     margin: auto;
     display: flex;
+    overflow: hidden;
 }
 
+/* 日歷 */
 main {
     width: 76%;
     height: 100%;
@@ -29,14 +32,23 @@ main {
     display: grid;
 }
 
-/* 日歷 */
-.week {
+.buttons,
+.weekList {
     display: flex;
     justify-content: space-between;
     text-align: center;
 }
 
-.week li {
+.buttons {
+    margin: 40px;
+}
+
+.choose .button {
+    padding: 20px;
+    background-color: aqua;
+}
+
+.weekList li {
     width: 100%;
     margin: 20px auto;
 }
@@ -59,7 +71,42 @@ aside {
     width: 24%;
     height: 100%;
     background-color: deepskyblue;
+}
 
+.timeBox,
+.quotation {
+    /* width: 100%; */
+    background-color: aquamarine;
+    text-align: center;
+    padding: 40px;
+    margin-right: 8px;
+    border-radius: 16px;
+}
+
+/* 顯示時間 */
+.timeBox p {
+    margin: 8px;
+}
+
+.timeBox .yearMonth {
+    font-size: 1.5em;
+}
+
+.timeBox .day {
+    font-size: 4em;
+}
+
+.timeBox .week {
+    font-size: 1.5em;
+}
+
+.timeBox .time {
+    font-size: 1em;
+}
+
+/* 引文 */
+.quotation .mark {
+    font-size: 8em;
 }
 
 
