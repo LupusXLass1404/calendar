@@ -70,14 +70,14 @@
                     <li>Fri.</li>
                     <li>Sat.</li>
                 </ul>
-                <table id="dateTable" class="calendarTable"></table>
+                <table id="dateTable"></table>
             </div>
 
-            <div id="monthTable" class="calendarTable">
+            <div id="monthTable" class="calendar">
                 <!-- 改變月的表格 -->
             </div>
 
-            <div id="yearTable">
+            <div id="yearTable" class="calendar">
                 <!-- 改變年的表格 -->
             </div>
 
@@ -95,36 +95,18 @@
     </footer>
 
     <script>
-
-        function changeTime(time) {
-            hide('calendar');
-            show('monthTable');
-
-            let changeClass = [...document.querySelectorAll('.changeMonth')];
-            // console.log(changeClass);
-            changeClass.forEach(ele => {
-                ele.addEventListener('click', function () {
-                    console.log(ele);
-                    show('calendar');
-                    hide('monthTable');
-                })
-            }); // forEach() 結束
-        } // changeTime() 結束
-
-
         // 宣告getId
         let monthId = document.getElementById('month');
         let yearId = document.getElementById('year');
 
-        // -12 +12
         // 監聽按鈕
         monthId.addEventListener('click', function () {
             // console.log('month');
             changeTime('monthTable');
-
         });
         yearId.addEventListener('click', function () {
             // console.log('year');
+            changeTime('yearTable');
         });
 
         // 暫時用表格
@@ -143,7 +125,11 @@
         for (i = 0; i < 4; i++) {
             month += "<tr>";
             for (j = 0; j < 3; j++) {
-                month += `<td class="changeMonth">${i * i + j}月</td>`;
+                month += `<td class="changeMonth">
+                            <a href="design.html?month=${i * i + j}" class="tableLink">
+                                ${i * i + j}月
+                            </a>
+                        </td>`;
             }
             month += "</tr>"
         }
@@ -151,6 +137,21 @@
         document.getElementById('monthTable').innerHTML = month;
         // console.log(`table: ${month}`)
 
+        // 改變時間
+        function changeTime(time) {
+            hide('calendar');
+            show('monthTable');
+
+            let changeClass = [...document.querySelectorAll('.changeMonth')];
+            // console.log(changeClass);
+            changeClass.forEach(ele => {
+                ele.addEventListener('click', function () {
+                    console.log(ele);
+                    show('calendar');
+                    hide('monthTable');
+                })
+            }); // forEach() 結束
+        } // changeTime() 結束
 
         // 隱藏／顯示
         function hide(id) {
