@@ -52,15 +52,15 @@
                 <div id="prev" class="change">
                     《 Previous month </div>
                 <div class="choose">
-                    <span id="year" class="button">Year</span>
-                    |
                     <span id="month" class="button">Month</span>
+                    |
+                    <span id="year" class="button">Year</span>
                 </div>
                 <div id="next" class="change">
                     Next month 》
                 </div>
             </div>
-            <div class="calendar">
+            <div id="calendar" class="calendar">
                 <ul class="weekList">
                     <li>Sun.</li>
                     <li>Mon.</li>
@@ -72,11 +72,20 @@
                 </ul>
                 <table id="dateTable" class="calendarTable"></table>
             </div>
+
+            <div id="monthTable" class="calendarTable">
+                <!-- 改變月的表格 -->
+            </div>
+
+            <div id="yearTable">
+                <!-- 改變年的表格 -->
+            </div>
+
             <div class="bottomButton">
                 <span id="return" class="button">Return</span>
             </div>
         </main>
-        <div class="changeTime"></div>
+
     </div>
     <footer>
         <p>
@@ -86,17 +95,39 @@
     </footer>
 
     <script>
-        function init() {
 
-        }
+        function changeTime(time) {
+            hide('calendar');
+            show('monthTable');
 
-        function changeTime() {
+            let changeClass = [...document.querySelectorAll('.changeMonth')];
+            // console.log(changeClass);
+            changeClass.forEach(ele => {
+                ele.addEventListener('click', function () {
+                    console.log(ele);
+                    show('calendar');
+                    hide('monthTable');
+                })
+            }); // forEach() 結束
+        } // changeTime() 結束
 
 
-        }
+        // 宣告getId
+        let monthId = document.getElementById('month');
+        let yearId = document.getElementById('year');
 
-        init()
+        // -12 +12
+        // 監聽按鈕
+        monthId.addEventListener('click', function () {
+            // console.log('month');
+            changeTime('monthTable');
 
+        });
+        yearId.addEventListener('click', function () {
+            // console.log('year');
+        });
+
+        // 暫時用表格
         let td = "";
 
         for (i = 0; i < 6; i++) {
@@ -106,8 +137,42 @@
             }
             td += "</tr>"
         }
-
         document.getElementById('dateTable').innerHTML = td;
+
+        let month = "<table>";
+        for (i = 0; i < 4; i++) {
+            month += "<tr>";
+            for (j = 0; j < 3; j++) {
+                month += `<td class="changeMonth">${i * i + j}月</td>`;
+            }
+            month += "</tr>"
+        }
+        month += "</table>"
+        document.getElementById('monthTable').innerHTML = month;
+        // console.log(`table: ${month}`)
+
+
+        // 隱藏／顯示
+        function hide(id) {
+            // console.log(`hide: ${id}`)
+            let getId = document.getElementById(id);
+            // console.log(`hide: ${getId}`)
+            getId.style.display = "none";
+        }
+        function show(id) {
+            // console.log(`show: ${id}`)
+            let getId = document.getElementById(id);
+            // console.log(`show: ${getId}`)
+            getId.style.display = "block";
+        }
+
+        // 初始化
+        function init() {
+            hide('yearTable');
+            hide('monthTable');
+        }
+        init()
+
     </script>
 
 
