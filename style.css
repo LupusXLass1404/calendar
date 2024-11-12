@@ -99,6 +99,10 @@ table td {
     font-size: 1.5rem;
 }
 
+#dateTable td {
+    padding: 16px;
+}
+
 .changeTable td {
     height: 100px;
 }
@@ -179,12 +183,25 @@ aside>div {
     font-size: 8rem;
 }
 
+/* 特殊字 */
+.non-nowMonth {
+    filter: opacity(40%);
+}
+
+#today {
+    background-color: rgb(26, 79, 108);
+    color: white;
+    border: 2px solid #FFF;
+    box-shadow: 0px 0px 0px 4px rgba(26, 79, 108, 1);
+}
+
+
 /* ============== 頁尾 ============== */
-footer {
+#foot {
     width: 100%;
     padding: 12px;
     background-color: rgba(0, 0, 0, 0.4);
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
     text-align: center;
     margin-top: 40px;
@@ -192,11 +209,10 @@ footer {
     bottom: 0;
 }
 
-footer a {
-    color: white;
+#foot a {
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
 }
-
 
 /* ============== 主題色 ============== */
 
@@ -207,7 +223,7 @@ footer a {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7);
+    /* text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7); */
 }
 
 .month_11 a {

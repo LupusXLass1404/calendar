@@ -54,14 +54,14 @@
 
         <main id="main">
             <div id="buttons" class="buttons">
-                <a href="design.html" class="button">
+                <a href="#" class="button">
                     <i class="fa-solid fa-circle-chevron-left"></i> Previous <span class="change">month</span>
                 </a>
                 <div class="choose">
                     <span id="month" class="button">Month</span>
                     <span id="year" class="button">Year</span>
                 </div>
-                <a href="design.html" class="button">
+                <a href="#" class="button">
                     Next <span class="change">month</span> <i class="fa-solid fa-circle-chevron-right"></i>
                 </a>
             </div>
@@ -78,19 +78,39 @@
                 <table id="dateTable">
                     <?php
                         $firstDay = date('Y-m-1');
-                        echo $firstDay;
+                        $thisDay = date('j');
+                        $thisweek = date('N');
+                        $thisMonth= date('m');
+                        // echo $firstDay;
+                        echo "<br>";
+                        $dynamicDay = strtotime($firstDay);
+                        $lastWeek = 7-$thisweek;
+                        $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
+                        // echo $dynamicDay;
+                        echo "<br>";
                     ?>
+
                     <?php
                         for ($i=1;$i<=6;$i++){
                             echo "<tr>";
                             for($j=1;$j<=7;$j++){
-                                echo "<td>";
-                                echo $i+$j;
+                                $dynamicMonth = date('m', $dynamicDay);
+                                $printDay = date('j', $dynamicDay);
+
+                                if ($thisMonth != $dynamicMonth){
+                                    echo "<td class='non-nowMonth'>";
+                                } else if($thisDay == $printDay) {
+                                    echo "<td id='today' class='today'>";
+                                }
+                                else {
+                                    echo "<td>";
+                                }
+                                echo $printDay;
+                                $dynamicDay = strtotime("+1 day", $dynamicDay);
                                 echo "</td>";
                             }
                             echo "</tr>";
                         }
-                        echo date('H:i:s');
                     ?>
                 </table>
             </div>
@@ -109,7 +129,7 @@
         </main>
 
     </div>
-    <footer>
+    <footer id="foot">
         <p>
             <a href="https://github.com/LupusXLass1404/calendar">
                 <i class="fa-brands fa-github"></i> github
