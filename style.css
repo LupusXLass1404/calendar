@@ -13,7 +13,6 @@ body {
 }
 
 a {
-    color: rgb(26, 79, 108);
     text-decoration: none;
 }
 
@@ -91,7 +90,7 @@ table {
     width: 100%;
     margin: 0 auto;
     border-collapse: collapse;
-    table-layout: fixed
+    table-layout: fixed;
 }
 
 table td {
@@ -170,7 +169,7 @@ aside>div {
     font-weight: 700;
 }
 
-.timeBox .time {
+.timeBox .clock {
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -201,10 +200,28 @@ footer a {
 
 /* ============== 主題色 ============== */
 
-.month_11 {
+.month_11,
+.month_11 .bottomButton a {
     color: rgb(26, 79, 108);
     background-image: url(./images/month_11.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7);
+}
+
+.month_11 a {
+    color: rgb(26, 79, 108);
+}
+
+.month_11 .bottomButton a {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.month_11 #dateTable td:nth-child(1),
+.month_11 #dateTable td:nth-child(7),
+.month_11 .weekList li:nth-child(1),
+.month_11 .weekList li:nth-child(7) {
+    color: rgb(90, 116, 188);
 }

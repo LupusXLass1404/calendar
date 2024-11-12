@@ -14,6 +14,10 @@
 </head>
 
 <body class="month_11">
+    <?php
+        date_default_timezone_set('Asia/Taipei');
+    ?>
+
     <!-- .container>aside+main^footer -->
     <div class="container">
         <aside>
@@ -27,8 +31,8 @@
                 <p class="week">
                     Wednesday
                 </p>
-                <p class="time">
-                    06:39:24
+                <p id="clock" class="clock">
+                    00:00:00
                 </p>
             </div>
 
@@ -50,16 +54,16 @@
 
         <main id="main">
             <div id="buttons" class="buttons">
-                <div id="prev" class="change button">
-                    <i class="fa-solid fa-circle-chevron-left"></i> Previous month
-                </div>
+                <a href="design.html" class="button">
+                    <i class="fa-solid fa-circle-chevron-left"></i> Previous <span class="change">month</span>
+                </a>
                 <div class="choose">
                     <span id="month" class="button">Month</span>
                     <span id="year" class="button">Year</span>
                 </div>
-                <div id="next" class="change button">
-                    Next month <i class="fa-solid fa-circle-chevron-right"></i>
-                </div>
+                <a href="design.html" class="button">
+                    Next <span class="change">month</span> <i class="fa-solid fa-circle-chevron-right"></i>
+                </a>
             </div>
             <div id="calendar" class="calendar">
                 <ul class="weekList">
@@ -71,7 +75,24 @@
                     <li>Fri.</li>
                     <li>Sat.</li>
                 </ul>
-                <table id="dateTable"></table>
+                <table id="dateTable">
+                    <?php
+                        $firstDay = date('Y-m-1');
+                        echo $firstDay;
+                    ?>
+                    <?php
+                        for ($i=1;$i<=6;$i++){
+                            echo "<tr>";
+                            for($j=1;$j<=7;$j++){
+                                echo "<td>";
+                                echo $i+$j;
+                                echo "</td>";
+                            }
+                            echo "</tr>";
+                        }
+                        echo date('H:i:s');
+                    ?>
+                </table>
             </div>
 
             <div id="monthTable" class="calendar changeTable">
@@ -83,7 +104,7 @@
             </div>
 
             <div class="bottomButton">
-                <a href="design.html" class="button"><span id="reset">Reset date</span></a>
+                <a href="#" class="button">Reset date</a>
             </div>
         </main>
 
@@ -111,40 +132,6 @@
             // console.log('year');
             changeTime('year');
         });
-
-        // 暫時用表格
-        let td = "";
-
-        for (i = 0; i < 6; i++) {
-            td += "<tr>";
-            for (j = 0; j < 7; j++) {
-                td += `<td>${i * i + j}</td>`;
-            }
-            td += "</tr>"
-        }
-        document.getElementById('dateTable').innerHTML = td;
-
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        let month = "<table>";
-        for (i = 0; i < 4; i++) {
-            month += "<tr>";
-            for (j = 0; j < 3; j++) {
-                month += `<td class="changeMonth">
-                            <a href="?month=1" class="tableLink">
-                                ${months[i * i + j]}
-                            </a>
-                        </td>`;
-            }
-            month += "</tr>"
-        }
-        month += "</table>"
-        document.getElementById('yearTable').innerHTML = month;
-        document.getElementById('monthTable').innerHTML = month;
-        // console.log(`table: ${month}`)
 
         // 改變時間
         function changeTime(time) {
@@ -182,11 +169,26 @@
             getId.style.display = "block";
         }
 
+        // 時鐘區
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 每秒更新一次時鐘
+        setInterval(updateClock, 1000);
+
         // 初始化
         function init() {
             hide('yearTable');
             hide('monthTable');
+            // 時鐘
+            updateClock();
         }
+
         init()
 
     </script>
