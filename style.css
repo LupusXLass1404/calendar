@@ -51,6 +51,7 @@ main {
 
 .buttons {
     margin: 40px;
+    align-items: center;
 }
 
 .button {
@@ -89,11 +90,15 @@ table {
 }
 
 table td {
-    height: 80px;
+    height: 64px;
     /* border: 1px solid #000; */
     text-align: center;
     font-size: 1.5rem;
     /* background-color: darkcyan; */
+}
+
+.changeTable td {
+    height: 100px;
 }
 
 .bottomButton>.button {

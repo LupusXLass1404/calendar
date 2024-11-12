@@ -50,14 +50,14 @@
 
         <main id="main">
             <div id="buttons" class="buttons">
-                <div id="prev" class="change">
+                <div id="prev" class="change button">
                     <i class="fa-solid fa-circle-chevron-left"></i> Previous month
                 </div>
                 <div class="choose">
                     <span id="month" class="button">Month</span>
                     <span id="year" class="button">Year</span>
                 </div>
-                <div id="next" class="change">
+                <div id="next" class="change button">
                     Next month <i class="fa-solid fa-circle-chevron-right"></i>
                 </div>
             </div>
@@ -74,11 +74,11 @@
                 <table id="dateTable"></table>
             </div>
 
-            <div id="monthTable" class="calendar">
+            <div id="monthTable" class="calendar changeTable">
                 <!-- 改變月的表格 -->
             </div>
 
-            <div id="yearTable" class="calendar">
+            <div id="yearTable" class="calendar changeTable">
                 <!-- 改變年的表格 -->
             </div>
 
@@ -134,7 +134,7 @@
             month += "<tr>";
             for (j = 0; j < 3; j++) {
                 month += `<td class="changeMonth">
-                            <a href="design.html?month=${i * i + j}" class="tableLink">
+                            <a href="#" class="tableLink">
                                 ${months[i * i + j]}
                             </a>
                         </td>`;
@@ -142,30 +142,15 @@
             month += "</tr>"
         }
         month += "</table>"
+        document.getElementById('yearTable').innerHTML = month;
         document.getElementById('monthTable').innerHTML = month;
-        // console.log(`table: ${month}`)
-
-        let year = "<table>";
-        for (i = 0; i < 4; i++) {
-            year += "<tr>";
-            for (j = 0; j < 3; j++) {
-                year += `<td class="changeMonth">
-                            <a href="?month=${i * i + j}" class="tableLink">
-                                ${2020 + (i * i + j)}
-                            </a>
-                        </td>`;
-            }
-            year += "</tr>"
-        }
-        year += "</table>"
-        document.getElementById('yearTable').innerHTML = year;
         // console.log(`table: ${month}`)
 
         // 改變時間
         function changeTime(time) {
-            hide('calendar');
             hide('monthTable');
             hide('yearTable');
+            hide('calendar');
             show(`${time}Table`);
             show('month');
             show('year');
@@ -178,6 +163,7 @@
                     console.log(ele);
                     show('calendar');
                     hide('monthTable');
+                    hide('yearTable');
                 })
             }); // forEach() 結束
         } // changeTime() 結束
