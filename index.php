@@ -16,8 +16,43 @@
 <body class="month_11">
     <?php
         date_default_timezone_set('Asia/Taipei');
-    ?>
 
+        if (isset($_GET['day'])){
+            $day = $_GET['day'];
+        } else {
+            $month=date('d');
+        }
+        if (isset($_GET['month'])){
+            $month = $_GET['month'];
+        } else {
+            $month=date('m');
+        }
+
+        if (isset($_GET['year'])){
+            $year = $_GET['year'];
+        } else {
+            $month=date('Y');
+        }
+
+        if($month >= 12){
+            $nextMonth=1;
+            $nextYear= year+1;
+        } else {
+            $nextMonth=$month+1;
+        }
+
+       
+        $firstDay = date('Y-m-1');
+        $thisDay = date('j');
+        $thisweek = date('N');
+        $thisMonth= date('m');
+        
+        // echo $firstDay;
+        $dynamicDay = strtotime($firstDay);
+        $lastWeek = 7-$thisweek;
+        $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
+        // echo $dynamicDay;
+    ?>
     <!-- .container>aside+main^footer -->
     <div class="container">
         <aside>
@@ -54,14 +89,14 @@
 
         <main id="main">
             <div id="buttons" class="buttons">
-                <a href="#" class="button">
+                <a href="?year=2024&month=1&day=1" class="button">
                     <i class="fa-solid fa-circle-chevron-left"></i> Previous <span class="change">month</span>
                 </a>
                 <div class="choose">
                     <span id="month" class="button">Month</span>
                     <span id="year" class="button">Year</span>
                 </div>
-                <a href="#" class="button">
+                <a href="?year=2024&month=1&day=1" class="button">
                     Next <span class="change">month</span> <i class="fa-solid fa-circle-chevron-right"></i>
                 </a>
             </div>
@@ -77,20 +112,6 @@
                 </ul>
                 <table id="dateTable">
                     <?php
-                        $firstDay = date('Y-m-1');
-                        $thisDay = date('j');
-                        $thisweek = date('N');
-                        $thisMonth= date('m');
-                        // echo $firstDay;
-                        echo "<br>";
-                        $dynamicDay = strtotime($firstDay);
-                        $lastWeek = 7-$thisweek;
-                        $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
-                        // echo $dynamicDay;
-                        echo "<br>";
-                    ?>
-
-                    <?php
                         for ($i=1;$i<=6;$i++){
                             echo "<tr>";
                             for($j=1;$j<=7;$j++){
@@ -100,9 +121,8 @@
                                 if ($thisMonth != $dynamicMonth){
                                     echo "<td class='non-nowMonth'>";
                                 } else if($thisDay == $printDay) {
-                                    echo "<td id='today' class='today'>";
-                                }
-                                else {
+                                    echo "<td id='today'>";
+                                } else {
                                     echo "<td>";
                                 }
                                 echo $printDay;
@@ -127,8 +147,8 @@
                 <a href="#" class="button">Reset date</a>
             </div>
         </main>
-
     </div>
+
     <footer id="foot">
         <p>
             <a href="https://github.com/LupusXLass1404/calendar">
@@ -152,6 +172,32 @@
             // console.log('year');
             changeTime('year');
         });
+        // 月表格
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        let monthNum = 1;
+
+        let month = "<table>";
+        month += "<caption>2024</caption>"
+        for (i = 0; i < 4; i++) {
+            month += "<tr>";
+            for (j = 0; j < 3; j++) {
+                month += `<td class="changeMonth">
+                            <a href="?month=1" class="tableLink">
+                                ${months[monthNum]}
+                            </a>
+                        </td>`;
+                monthNum+=1;
+            }
+            month += "</tr>"
+        }
+        month += "</table>"
+        document.getElementById('monthTable').innerHTML = month;
+
+        // 年表格
 
         // 改變時間
         function changeTime(time) {
