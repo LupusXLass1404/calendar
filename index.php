@@ -202,11 +202,11 @@
                 case 'month':
                     console.log('month: ' + type);
                     prevButton = `
-                        <a href="#" class="button">
+                        <a id="prevMonth" href="#" class="button">
                             <i class="fa-solid fa-circle-chevron-left"></i> Previous year
                         </a>`;
                     nextButton = `
-                        <a href="#" class="button">
+                        <a id="nextMonth" href="#" class="button">
                             Next year <i class="fa-solid fa-circle-chevron-right"></i>
                         </a>`;
                     break;
@@ -238,12 +238,31 @@
             nextId.innerHTML = nextButton;
             console.log(prevButton);
             console.log(nextButton);
+
+            switch (type) {
+                case 'month':
+                    let prevMonthId = document.getElementById('prevMonth');
+                    let nextMonthId = document.getElementById('nextMonth');
+
+                    prevMonthId.addEventListener('click', function(){
+                        yearJs -= 1;
+                        changeTitle(month);
+                    })
+                    nextMonthId.addEventListener('click', function(){
+                        yearJs += 1;
+                        changeTitle(month);
+                    })
+                    break;
+                case 'year':
+                    console.log('year: ' + type);
+                    break;
+            }
         }
 
 
         let monthNum = 0;
         let monthTable = "<table>";
-        monthTable += `<caption>${yearJs}</caption>`
+        monthTable += `<caption id="monthTitle">${yearJs}</caption>`
         for (i = 0; i < 4; i++) {
             monthTable += "<tr>";
             for (j = 0; j < 3; j++) {
@@ -295,6 +314,10 @@
 
         // 每秒更新一次時鐘
         setInterval(updateClock, 1000);
+
+        function changeTitle(time) {
+            document.getElementById('monthtitle').innerHTML = yearJs;
+        }
 
         // 隱藏／顯示
         function hide(id) {
