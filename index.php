@@ -20,7 +20,7 @@
         if (isset($_GET['day'])){
             $day = $_GET['day'];
         } else {
-            $month=date('d');
+            $day=date('d');
         }
         if (isset($_GET['month'])){
             $month = $_GET['month'];
@@ -31,17 +31,25 @@
         if (isset($_GET['year'])){
             $year = $_GET['year'];
         } else {
-            $month=date('Y');
+            $year=date('Y');
+        }
+
+        if($month <= 1){
+            $prevMonth=12;
+            $prevYear=$year-1;
+        } else {
+            $prevMonth=$month-1;
+            $prevYear=$year;
         }
 
         if($month >= 12){
             $nextMonth=1;
-            $nextYear= year+1;
+            $nextYear=$year+1;
         } else {
             $nextMonth=$month+1;
+            $nextYear=$year;
         }
-
-       
+        
         $firstDay = date('Y-m-1');
         $thisDay = date('j');
         $thisweek = date('N');
@@ -86,19 +94,19 @@
             </div>
 
         </aside>
-
+        <!--  -->
         <main id="main">
             <div id="buttons" class="buttons">
-                <a href="?year=2024&month=1&day=1" class="button">
-                    <i class="fa-solid fa-circle-chevron-left"></i> Previous <span class="change">month</span>
-                </a>
+                <div id="prevChange">  
+                    <!-- 放上一個按鈕的地方 -->
+                </div>
                 <div class="choose">
                     <span id="month" class="button">Month</span>
                     <span id="year" class="button">Year</span>
                 </div>
-                <a href="?year=2024&month=1&day=1" class="button">
-                    Next <span class="change">month</span> <i class="fa-solid fa-circle-chevron-right"></i>
-                </a>
+                <div id="nextChange">
+                    <!-- 放下一個按鈕的地方 -->
+                </div>
             </div>
             <div id="calendar" class="calendar">
                 <ul class="weekList">
@@ -121,7 +129,7 @@
                                 if ($thisMonth != $dynamicMonth){
                                     echo "<td class='non-nowMonth'>";
                                 } else if($thisDay == $printDay) {
-                                    echo "<td id='today'>";
+                                    echo "<td class='thisTime'>";
                                 } else {
                                     echo "<td>";
                                 }
@@ -144,14 +152,14 @@
             </div>
 
             <div class="bottomButton">
-                <a href="#" class="button">Reset date</a>
+                <a href="./index.php" class="button">Reset date</a>
             </div>
         </main>
     </div>
 
     <footer id="foot">
         <p>
-            <a href="https://github.com/LupusXLass1404/calendar">
+            <a href="https://github.com/LupusXLass1404/calendar" target="_blank">
                 <i class="fa-brands fa-github"></i> github
             </a>
             <i class="fa-regular fa-copyright"></i> 2024 Nemophila. All Rights Reserved.
@@ -159,9 +167,22 @@
     </footer>
 
     <script>
-        // 宣告getId
+        // getId
         let monthId = document.getElementById('month');
         let yearId = document.getElementById('year');
+        let prevId = document.getElementById('prevChange');
+        let nextId = document.getElementById('nextChange');
+        
+        // PHP
+        let dayJs = `<?=$day?>`;
+        let monthJs = `<?=$month?>`;
+        let yearJs = `<?=$year?>`;
+
+        // 月表格
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
 
         // 監聽按鈕
         monthId.addEventListener('click', function () {
@@ -172,30 +193,71 @@
             // console.log('year');
             changeTime('year');
         });
-        // 月表格
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
+        
+        // 頂端按鈕
+        function topButtons(type) {
+            let prevButton, nextButton;
+            
+            switch (type) {
+                case 'month':
+                    console.log('month: ' + type);
+                    prevButton = `
+                        <a href="#" class="button">
+                            <i class="fa-solid fa-circle-chevron-left"></i> Previous year
+                        </a>`;
+                    nextButton = `
+                        <a href="#" class="button">
+                            Next year <i class="fa-solid fa-circle-chevron-right"></i>
+                        </a>`;
+                    break;
+                case 'year':
+                    console.log('year: ' + type);
+                    prevButton = `
+                        <a href="#" class="button">
+                            <i class="fa-solid fa-circle-chevron-left"></i> Previous
+                        </a>`;
+                    nextButton = `
+                        <a href="#" class="button">
+                            Next <i class="fa-solid fa-circle-chevron-right"></i>
+                        </a>`;
+                    break;
+                default:
+                    console.log('default: '+type);
+                    prevButton = `
+                        <a href="?year=<?=$prevYear;?>&month=<?=$prevMonth;?>&day=<?=$day;?>" class="button">
+                            <i class="fa-solid fa-circle-chevron-left"></i> Previous month
+                        </a>`;
+                    nextButton = `
+                        <a href="?year=<?=$nextYear;?>&month=<?=$nextMonth;?>&day=<?=$day?>" class="button">
+                            Next month <i class="fa-solid fa-circle-chevron-right"></i>
+                        </a>`;
+                    break;
+                }
 
-        let monthNum = 1;
+            prevId.innerHTML = prevButton;
+            nextId.innerHTML = nextButton;
+            console.log(prevButton);
+            console.log(nextButton);
+        }
 
-        let month = "<table>";
-        month += "<caption>2024</caption>"
+
+        let monthNum = 0;
+        let monthTable = "<table>";
+        monthTable += `<caption>${yearJs}</caption>`
         for (i = 0; i < 4; i++) {
-            month += "<tr>";
+            monthTable += "<tr>";
             for (j = 0; j < 3; j++) {
-                month += `<td class="changeMonth">
-                            <a href="?month=1" class="tableLink">
+                monthTable += `<td class="changeMonth">
+                            <a href="?year=${yearJs}&month=${monthNum+1}&day=${dayJs}" class="tableLink">
                                 ${months[monthNum]}
                             </a>
                         </td>`;
                 monthNum+=1;
             }
-            month += "</tr>"
+            monthTable += "</tr>"
         }
-        month += "</table>"
-        document.getElementById('monthTable').innerHTML = month;
+        monthTable += "</table>"
+        document.getElementById('monthTable').innerHTML = monthTable;
 
         // 年表格
 
@@ -208,6 +270,7 @@
             show('month');
             show('year');
             hide(time);
+            topButtons(time);
 
             let changeClass = [...document.querySelectorAll('.changeMonth')];
             // console.log(changeClass);
@@ -217,9 +280,21 @@
                     show('calendar');
                     hide('monthTable');
                     hide('yearTable');
-                })
+                }, { once: true })
             }); // forEach() 結束
         } // changeTime() 結束
+
+        // 時鐘區
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 每秒更新一次時鐘
+        setInterval(updateClock, 1000);
 
         // 隱藏／顯示
         function hide(id) {
@@ -235,20 +310,9 @@
             getId.style.display = "block";
         }
 
-        // 時鐘區
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-
-        // 每秒更新一次時鐘
-        setInterval(updateClock, 1000);
-
         // 初始化
         function init() {
+            topButtons('calendar');
             hide('yearTable');
             hide('monthTable');
             // 時鐘
