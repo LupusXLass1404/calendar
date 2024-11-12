@@ -83,7 +83,7 @@
             </div>
 
             <div class="bottomButton">
-                <span id="return" class="button">Return</span>
+                <a href="design.html" class="button"><span id="reset">Reset date</span></a>
             </div>
         </main>
 
@@ -134,7 +134,7 @@
             month += "<tr>";
             for (j = 0; j < 3; j++) {
                 month += `<td class="changeMonth">
-                            <a href="#" class="tableLink">
+                            <a href="?month=1" class="tableLink">
                                 ${months[i * i + j]}
                             </a>
                         </td>`;
