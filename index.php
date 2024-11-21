@@ -49,20 +49,17 @@
             $nextMonth=$month+1;
             $nextYear=$year;
         }
-
-        $firstDay = date($year."-".$month."-1");
+        
         $thisToday = strtotime(date('y-m-d'));
         $thisDay = date('j', $thisToday);
         $thisMonth = date('m', $thisToday);
-        $chooseTime = strtotime(date($year."-".$month."-".$day));
-        $chooseWeek = date('N', $chooseTime);
-        $chooseMonth = date('N', $chooseTime);
+        $thisYear = date('Y', $thisToday);
 
-        // echo $firstDay;
-        $dynamicDay = strtotime($firstDay);
-        $lastWeek = 7-(7-$chooseWeek);
-        $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
-        // echo $dynamicDay;
+        $firstDay = strtotime(date($year."-".$month."-1"));
+        $chooseTime = strtotime(date($year."-".$month."-".$day));
+        $chooseWeek = date('N', $firstDay);
+        $chooseMonth = date('m', $chooseTime);
+        $chooseYear = date('Y', $chooseTime);
     ?>
     <!-- .container>aside+main^footer -->
     <div class="container">
@@ -136,21 +133,29 @@
                 </ul>
                 <table id="dateTable">
                     <?php
+                        $dynamicDay = $firstDay;
+                        $lastWeek = 7-(7-$chooseWeek)+1;
+                        $lastWeek = $chooseWeek;
+                        
+                        $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
+
                         for ($i=1;$i<=6;$i++){
                             echo "<tr>";
                             for($j=1;$j<=7;$j++){
-                                $dynamicMonth = date('m', $dynamicDay);
+                                $dynamicMonth = date('n', $dynamicDay);
+                                // echo "$dynamicMonth,";
+                                // echo $dynamicDay;
                                 $printDay = date('j', $dynamicDay);
+                                $chooseTimeClass=(date("Y-m-d",$chooseTime)==date("Y-m-d", $dynamicDay))?'chooseTime':'';
 
                                 if ($month != $dynamicMonth){
-                                    echo "<td class='non-nowMonth'>";
-                                } else if($thisToday == $chooseTime && $thisDay == $printDay) {
-                                    echo "<td class='thisTime'>";
+                                    echo "<td class='non-nowMonth $chooseTimeClass'>";
+                                } else if($thisYear == $chooseYear && $thisMonth == $chooseMonth &&  $thisDay == $printDay) {
+                                    echo "<td class='thisTime $chooseTimeClass'>";
                                 } else {
-                                    echo "<td>";
-                                    
+                                    echo "<td class='$chooseTimeClass'>";   
                                 }
-                                echo $printDay;
+                                echo "<a href='?year=$year&month=$dynamicMonth&day=$printDay' class='tableLink'>$printDay</a>";
                                 $dynamicDay = strtotime("+1 day", $dynamicDay);
                                 echo "</td>";
                             }
@@ -185,10 +190,10 @@
 
     <script>
         // getId
-        let monthId = document.getElementById('month');
-        let yearId = document.getElementById('year');
-        let prevId = document.getElementById('prevChange');
-        let nextId = document.getElementById('nextChange');
+        const monthId = document.getElementById('month');
+        const yearId = document.getElementById('year');
+        const prevId = document.getElementById('prevChange');
+        const nextId = document.getElementById('nextChange');
         
         // PHP
         let dayJs = `<?=$day?>`;
@@ -204,10 +209,12 @@
         // 監聽按鈕
         monthId.addEventListener('click', function () {
             // console.log('month');
+            monthTable();
             changeTime('month');
         });
         yearId.addEventListener('click', function () {
             // console.log('year');
+            yearTable()
             changeTime('year');
         });
         
@@ -217,7 +224,7 @@
             
             switch (type) {
                 case 'month':
-                    console.log('month: ' + type);
+                    // console.log('month: ' + type);
                     prevButton = `
                         <a id="prevMonth" href="#" class="button">
                             <i class="fa-solid fa-circle-chevron-left"></i> Previous year
@@ -228,18 +235,18 @@
                         </a>`;
                     break;
                 case 'year':
-                    console.log('year: ' + type);
+                    // console.log('year: ' + type);
                     prevButton = `
-                        <a href="#" class="button">
+                        <a id="prevYear" href="#" class="button">
                             <i class="fa-solid fa-circle-chevron-left"></i> Previous
                         </a>`;
                     nextButton = `
-                        <a href="#" class="button">
+                        <a id="nextYear" href="#" class="button">
                             Next <i class="fa-solid fa-circle-chevron-right"></i>
                         </a>`;
                     break;
                 default:
-                    console.log('default: '+type);
+                    // console.log('default: '+type);
                     prevButton = `
                         <a href="?year=<?=$prevYear;?>&month=<?=$prevMonth;?>&day=<?=$day;?>" class="button">
                             <i class="fa-solid fa-circle-chevron-left"></i> Previous month
@@ -253,49 +260,87 @@
 
             prevId.innerHTML = prevButton;
             nextId.innerHTML = nextButton;
-            console.log(prevButton);
-            console.log(nextButton);
+            // console.log(prevButton);
+            // console.log(nextButton);
 
             switch (type) {
                 case 'month':
-                    let prevMonthId = document.getElementById('prevMonth');
-                    let nextMonthId = document.getElementById('nextMonth');
+                    const prevMonthId = document.getElementById('prevMonth');
+                    const nextMonthId = document.getElementById('nextMonth');
 
                     prevMonthId.addEventListener('click', function(){
-                        yearJs -= 1;
+                        yearJs = Number(yearJs) - 1;
                         changeTitle(month);
+                        monthTable();
                     })
                     nextMonthId.addEventListener('click', function(){
-                        yearJs += 1;
+                        yearJs = Number(yearJs) + 1;
                         changeTitle(month);
+                        monthTable();
                     })
                     break;
                 case 'year':
-                    console.log('year: ' + type);
+                    const prevYearId = document.getElementById('prevYear');
+                    const nextYearId = document.getElementById('nextYear');
+
+                    prevYearId.addEventListener('click', function(){
+                        yearJs = Number(yearJs) - 12;
+                        changeTitle(year);
+                        yearTable();
+                    })
+                    nextYearId.addEventListener('click', function(){
+                        yearJs = Number(yearJs) + 12;
+                        changeTitle(year);
+                        yearTable();
+                    })
                     break;
             }
         }
 
         // 選擇月份的表格
-        let monthNum = 0;
-        let monthTable = "<table>";
-        monthTable += `<caption id="monthTitle">${yearJs}</caption>`
-        for (i = 0; i < 4; i++) {
-            monthTable += "<tr>";
-            for (j = 0; j < 3; j++) {
-                monthTable += `<td class="changeMonth">
-                            <a href="?year=${yearJs}&month=${monthNum+1}&day=${dayJs}" class="tableLink">
-                                ${months[monthNum]}
-                            </a>
-                        </td>`;
-                monthNum+=1;
+        function monthTable(){
+            let monthNum = 0;
+            let monthTable = "<table>";
+            monthTable += `<caption id="monthTitle">${yearJs}</caption>`
+            for (i = 0; i < 4; i++) {
+                monthTable += "<tr>";
+                for (j = 0; j < 3; j++) {
+                    monthTable += `<td class="changeMonth">
+                                <a href="?year=${yearJs}&month=${monthNum+1}&day=${dayJs}" class="tableLink">
+                                    ${months[monthNum]}
+                                </a>
+                            </td>`;
+                    monthNum+=1;
+                }
+                monthTable += "</tr>"
             }
-            monthTable += "</tr>"
-        }
-        monthTable += "</table>"
-        document.getElementById('monthTable').innerHTML = monthTable;
+            monthTable += "</table>"
+            document.getElementById('monthTable').innerHTML = monthTable;
+            // if ($yearJs ){
 
-        // 年表格
+            // }
+        }
+
+        // 選擇年份的表格
+        function yearTable(){
+            let yearNum = yearJs-4;
+            let yearTable = "<table>";
+            yearTable += `<caption id="yearTitle">${yearNum} - ${yearNum+11}</caption>`
+            for (i = 0; i < 4; i++) {
+                yearTable += "<tr>";
+                for (j = 0; j < 3; j++) {
+                    yearTable += `<td class="changeYear">
+                                <a href="?year=${yearNum}&month=${monthJs}&day=${dayJs}" class="tableLink">
+                                    ${yearNum}
+                                </a>
+                            </td>`;
+                    yearNum+=1;
+                }
+                yearTable += "</tr>"
+            }
+            yearTable += "</table>"
+            document.getElementById('yearTable').innerHTML = yearTable;
+        }
 
         // 改變時間
         function changeTime(time) {
@@ -333,7 +378,14 @@
         setInterval(updateClock, 1000);
 
         function changeTitle(time) {
-            document.getElementById('monthtitle').innerHTML = yearJs;
+            switch (time) {
+                case 'month':
+                    document.getElementById('monthTitle').innerHTML = yearJs;
+                    break;
+                case 'year':
+                    document.getElementById('yearTitle').innerHTML = `${yearNum} - ${yearNum+11}`;     
+                    break;
+            }
         }
 
         // 隱藏／顯示
