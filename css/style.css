@@ -226,38 +226,64 @@ aside>div {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* ============== 主題色 ============== */
-.month_11,
-.month_11 a,
-.month_11 .bottomButton a {
-    color: rgb(26, 79, 108);
+/* 背景圖片 */
+
+.month_1,
+.month_1 .bottomButton a {
+    background: url('../images/month_1.jpg') no-repeat center center / cover;
+}
+
+.month_2,
+.month_2 .bottomButton a {
+    background: url('../images/month_2.jpg') no-repeat center center / cover;
+}
+
+.month_3,
+.month_3 .bottomButton a {
+    background: url('../images/month_3.jpg') no-repeat center center / cover;
+}
+
+.month_4,
+.month_4 .bottomButton a {
+    background: url('../images/month_4.jpg') no-repeat center center / cover;
+}
+
+.month_5,
+.month_5 .bottomButton a {
+    background: url('../images/month_5.jpg') no-repeat center center / cover;
+}
+
+.month_6,
+.month_6 .bottomButton a {
+    background: url('../images/month_6.jpg') no-repeat center center / cover;
+}
+
+.month_7,
+.month_7 .bottomButton a {
+    background: url('../images/month_7.jpg') no-repeat center center / cover;
+}
+
+.month_8,
+.month_8 .bottomButton a {
+    background: url('../images/month_8.jpg') no-repeat center center / cover;
+}
+
+.month_9,
+.month_9 .bottomButton a {
+    background: url('../images/month_9.jpg') no-repeat center center / cover;
+}
+
+.month_10,
+.month_10 .bottomButton a {
+    background: url('../images/month_10.jpg') no-repeat center center / cover;
 }
 
 .month_11,
 .month_11 .bottomButton a {
-    background: url(../images/month_11.jpg) no-repeat center center / cover;
+    background: url('../images/month_11.jpg') no-repeat center center / cover;
 }
 
-.month_11 #dateTable td:nth-child(1) a,
-.month_11 #dateTable td:nth-child(7) a,
-.month_11 .weekList li:nth-child(1),
-.month_11 .weekList li:nth-child(7) {
-    color: rgb(86, 117, 201);
-}
-
-.month_11 .thisTime a {
-    background-color: rgb(86, 117, 201);
-}
-
-.month_11 caption,
-.month_11 .tableLink:active {
-    background-color: rgb(26, 79, 108);
-}
-
-.month_11 .tableLink:hover {
-    border: 3px solid rgb(26, 79, 108);
-}
-
-.month_11 .button {
-    background-color: rgba(161, 205, 255, 0.5);
+.month_12,
+.month_12 .bottomButton a {
+    background: url('../images/month_12.jpg') no-repeat center center / cover;
 }

@@ -33,6 +33,8 @@
             $nextMonth=$month+1;
             $nextYear=$year;
         }
+
+        include("./css/theme.php"); 
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,12 +46,13 @@
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/theme.php">
     <script src="https://kit.fontawesome.com/a3ca2244ae.js" crossorigin="anonymous"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
 </head>
-<body class="base month_<?=$month?>">
+<body class="base month month_<?=$month;?>">
 
     <?php
         $thisToday = strtotime(date('y-m-d'));
