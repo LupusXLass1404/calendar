@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://kit.fontawesome.com/a3ca2244ae.js" crossorigin="anonymous"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-</head>
-
-<body class="month_11">
     <?php
         date_default_timezone_set('Asia/Taipei');
 
@@ -49,7 +33,25 @@
             $nextMonth=$month+1;
             $nextYear=$year;
         }
-        
+    ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless Calendar</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://kit.fontawesome.com/a3ca2244ae.js" crossorigin="anonymous"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+<body class="base month_<?=$month?>">
+
+    <?php
         $thisToday = strtotime(date('y-m-d'));
         $thisDay = date('j', $thisToday);
         $thisMonth = date('m', $thisToday);
@@ -199,8 +201,10 @@
         let dayJs = `<?=$day?>`;
         let monthJs = `<?=$month?>`;
         let yearJs = `<?=$year?>`;
+        const thisYearJs = `<?=$thisYear?>`;
+        const thisMonthJs = `<?=$thisMonth?>`;
 
-        // 月表格
+        // 月陣列
         const months = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -305,7 +309,7 @@
             for (i = 0; i < 4; i++) {
                 monthTable += "<tr>";
                 for (j = 0; j < 3; j++) {
-                    monthTable += `<td class="changeMonth">
+                    monthTable += `<td class="changeMonth ${thisYearJs == yearJs &&  thisMonthJs == monthNum+1 ? "thisTime" : ""}">
                                 <a href="?year=${yearJs}&month=${monthNum+1}&day=${dayJs}" class="tableLink">
                                     ${months[monthNum]}
                                 </a>
@@ -329,7 +333,7 @@
             for (i = 0; i < 4; i++) {
                 yearTable += "<tr>";
                 for (j = 0; j < 3; j++) {
-                    yearTable += `<td class="changeYear">
+                    yearTable += `<td class="changeYear ${thisYearJs == yearNum ? "thisTime" : ""}">
                                 <a href="?year=${yearNum}&month=${monthJs}&day=${dayJs}" class="tableLink">
                                     ${yearNum}
                                 </a>
