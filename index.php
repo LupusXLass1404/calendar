@@ -49,15 +49,18 @@
             $nextMonth=$month+1;
             $nextYear=$year;
         }
-        
-        $firstDay = date('Y-m-1');
-        $thisDay = date('j');
-        $thisweek = date('N');
-        $thisMonth= date('m');
-        
+
+        $firstDay = date($year."-".$month."-1");
+        $thisToday = strtotime(date('y-m-d'));
+        $thisDay = date('j', $thisToday);
+        $thisMonth = date('m', $thisToday);
+        $chooseTime = strtotime(date($year."-".$month."-".$day));
+        $chooseWeek = date('N', $chooseTime);
+        $chooseMonth = date('N', $chooseTime);
+
         // echo $firstDay;
         $dynamicDay = strtotime($firstDay);
-        $lastWeek = 7-$thisweek;
+        $lastWeek = 7-(7-$chooseWeek);
         $dynamicDay = strtotime("-$lastWeek day", $dynamicDay);
         // echo $dynamicDay;
     ?>
@@ -65,14 +68,27 @@
     <div class="container">
         <aside>
             <div class="timeBox">
+                <?php
+                    // 處理日期文字
+                    $showWeek = date("l", $chooseTime);
+                    $showMonth = date("F", $chooseTime);
+                    $dayOrdinal = "th";
+                    if (!in_array($day, array(11,12,13))) {
+                        switch ($day % 10) {
+                            case 1:  $dayOrdinal = 'st'; break;
+                            case 2:  $dayOrdinal = 'nd'; break;
+                            case 3:  $dayOrdinal = 'rd'; break;
+                        }
+                    }
+                ?>
                 <p class="yearMonth">
-                    September ◆ 2024
+                    <?=$showMonth;?> ◆ <?= $year;?>
                 </p>
                 <p class="day">
-                    24<span class="ordinal">th</span>
+                    <?=$day;?><span class="ordinal"><?=$dayOrdinal;?></span>
                 </p>
                 <p class="week">
-                    Wednesday
+                    <?=$showWeek?>
                 </p>
                 <p id="clock" class="clock">
                     00:00:00
@@ -126,12 +142,13 @@
                                 $dynamicMonth = date('m', $dynamicDay);
                                 $printDay = date('j', $dynamicDay);
 
-                                if ($thisMonth != $dynamicMonth){
+                                if ($month != $dynamicMonth){
                                     echo "<td class='non-nowMonth'>";
-                                } else if($thisDay == $printDay) {
+                                } else if($thisToday == $chooseTime && $thisDay == $printDay) {
                                     echo "<td class='thisTime'>";
                                 } else {
                                     echo "<td>";
+                                    
                                 }
                                 echo $printDay;
                                 $dynamicDay = strtotime("+1 day", $dynamicDay);
@@ -228,7 +245,7 @@
                             <i class="fa-solid fa-circle-chevron-left"></i> Previous month
                         </a>`;
                     nextButton = `
-                        <a href="?year=<?=$nextYear;?>&month=<?=$nextMonth;?>&day=<?=$day?>" class="button">
+                        <a href="?year=<?=$nextYear;?>&month=<?=$nextMonth;?>&day=<?=$day;?>" class="button">
                             Next month <i class="fa-solid fa-circle-chevron-right"></i>
                         </a>`;
                     break;
@@ -259,7 +276,7 @@
             }
         }
 
-
+        // 選擇月份的表格
         let monthNum = 0;
         let monthTable = "<table>";
         monthTable += `<caption id="monthTitle">${yearJs}</caption>`
