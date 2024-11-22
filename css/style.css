@@ -10,6 +10,7 @@ body {
     display: flex;
     font-size: 18px;
     font-family: "Roboto", sans-serif;
+    overflow: hidden;
 }
 
 a {
@@ -73,6 +74,7 @@ main {
     margin: 0 8px;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: white !important;
 }
 
 .button:hover {
@@ -106,6 +108,10 @@ table td {
     font-size: 1.5rem;
 }
 
+table th {
+    padding: 8px;
+}
+
 #dateTable td {
     /* padding: 16px; */
 }
@@ -116,6 +122,8 @@ caption {
     border-radius: 50px;
     padding: 8px;
     margin-bottom: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    /* box-shadow: 1px 12px 0px rgba(255, 255, 255, 0.5); */
 }
 
 
@@ -299,4 +307,37 @@ aside>div {
 .month_12,
 .month_12 .bottomButton a {
     background: url('../images/month_12.jpg') no-repeat center center / cover;
+}
+
+.snow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* 防止雪花影響到其他元素的交互 */
+    z-index: 100;
+}
+
+.snowflake {
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall 5s;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh);
+        /* 垂直方向上的動畫效果 */
+        opacity: 0;
+    }
 }

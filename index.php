@@ -53,6 +53,7 @@
         rel="stylesheet">
 </head>
 <body class="base month month_<?=$month;?>">
+<div class="snow-container"></div>
 
     <?php
         $thisToday = strtotime(date('y-m-d'));
@@ -126,17 +127,19 @@
                     <!-- 放下一個按鈕的地方 -->
                 </div>
             </div>
+            
             <div id="calendar" class="calendar">
-                <ul class="weekList">
-                    <li>Sun.</li>
-                    <li>Mon.</li>
-                    <li>Tue.</li>
-                    <li>Wed.</li>
-                    <li>Thu.</li>
-                    <li>Fri.</li>
-                    <li>Sat.</li>
-                </ul>
                 <table id="dateTable">
+                <caption><?=$year;?> — <?=$month;?></caption>
+                    <tr>
+                        <th>Sun.</th>
+                        <th>Mon.</th>
+                        <th>Tue.</th>
+                        <th>Wed.</th>
+                        <th>Thu.</th>
+                        <th>Fri.</th>
+                        <th>Sat.</th>
+                    </tr>
                     <?php
                         $dynamicDay = $firstDay;
                         $lastWeek = 7-(7-$chooseWeek)+1;
@@ -419,6 +422,33 @@
         }
 
         init()
+
+        document.addEventListener('mousemove', function(event) {
+  // 創建雪花元素
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+
+  // 設置雪花的大小，隨機生成一個 3 到 6 像素的大小
+  const size = Math.random() * 3 + 3;
+  snowflake.style.width = `${size}px`;
+  snowflake.style.height = `${size}px`;
+
+  // 設置雪花的初始位置，根據鼠標位置放置
+  snowflake.style.left = `${event.pageX - size / 2}px`;
+  snowflake.style.top = `${event.pageY - size / 2}px`;
+
+  // 設置雪花掉落的速度，隨機設定
+  const animationDuration = Math.random() * 3 + 2;
+  snowflake.style.animationDuration = `${animationDuration}s`;
+
+  // 將雪花加入到雪花容器中
+  document.querySelector('.snow-container').appendChild(snowflake);
+
+  // 在動畫結束後移除雪花
+  snowflake.addEventListener('animationend', function() {
+    snowflake.remove();
+  });
+});
 
     </script>
 
