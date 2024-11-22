@@ -13,7 +13,7 @@
             'special' => "rgb(231 171 255)",
         ],
         [
-            'title'=> "rgb(255 173 199)", // 粉
+            'title'=> "rgb(237 102 145)", // 粉
             'button'=> "rgba(255 132 190 / 50%)", 
             'special' => "rgb(255 173 199)",
         ],
@@ -28,42 +28,37 @@
             'special' => "rgb(255 254 234)",
         ],
         [
-            'text' => "rgb(34, 139, 34)", 
-            'title'=> "rgb(34, 139, 34)", // 珊瑚
-            'button'=> "rgba(50, 205, 50, 0.5)", 
-            'special' => "rgb(0, 100, 0)",
+            'title'=> "rgb(255 132 132)", // 珊瑚
+            'button'=> "rgba(253 141 118 / 50%)", 
+            'special' => "rgb(255 157 157)",
         ],
         [
-            'text' => "rgb(230, 230, 250)", 
-            'title'=> "rgb(230, 230, 250)", // 淺紫
-            'button'=> "rgba(216, 191, 216, 0.5)", 
-            'special' => "rgb(147, 112, 219)",
+            'title'=> "rgb(39 158 191)", // 藍
+            'button'=> "rgba(70 146 180 / 50%)", 
+            'special' => "rgb(0 241 255)",
         ],
         [
-            'text' => "rgb(255, 215, 0)", 
-            'title'=> "rgb(255, 215, 0)", // 黃
-            'button'=> "rgba(255, 255, 224, 0.5)", 
-            'special' => "rgb(240, 230, 140)",
+            'title'=> "rgb(255 185 0)", // 黃
+            'button'=> "rgba(255 225 32 / 50%)", 
+            'special' => "rgb(255 241 116)",
         ],
         [
-            'text' => "rgb(139, 0, 0)", 
-            'title'=> "rgb(139, 0, 0)", // 深紅
-            'button'=> "rgba(205, 92, 92, 0.5)", 
-            'special' => "rgb(178, 34, 34)",
+            'title'=> "rgb(137 0 0)", // 紅
+            'button'=> "rgba(209 13 13 / 50%)", 
+            'special' => "rgb(239 27 27)",
         ],
         [
-            'text' => "rgb(101, 67, 33)",
-            'title'=> "rgb(101, 67, 33)", // 深棕
-            'button'=> "rgba(139, 69, 19, 0.5)", 
-            'special' => "rgb(160, 82, 45)",
+            'title'=> "rgb(141 102 63)", // 深棕
+            'button'=> "rgba(143 85 43 / 50%)", 
+            'special' => "rgb(203 139 108)",
         ],
         [
-            'title'=> "rgb(171 58 7)", // 橘
-            'button'=> "rgba(247 151 65 / 50%)", 
-            'special' => "rgb(255 185 80)",
+            'title'=> "rgb(191 76 24)", // 橘
+            'button'=> "rgba(255 125 20 / 50%)", 
+            'special' => "rgb(255 153 0)",
         ],
         [
-            'title'=> "rgb(54 112 173)", // 深藍
+            'title'=> "rgb(54 112 173)", // 冰藍
             'button'=> "rgba(135 191 255 / 50%)",
             'special' => "rgb(141 196 255)",
         ]
@@ -87,13 +82,16 @@
         background-color: <?=$color[$c]['special'];?>;
     }
 
-    .month caption,
+    .month caption{
+        background-color: <?=$color[$c]['title'];?>;
+    }
+
     .month .tableLink:active {
         background-color: <?=$color[$c]['special'];?>;
     }
 
     .month .tableLink:hover {
-        border: 3px solid <?=$color[$c]['special'];?>;
+        border: 3px solid <?=$color[$c]['special'];?>>;
     }
 
     .month .button {

@@ -199,10 +199,9 @@ aside>div {
 
 /* 引文 */
 .quotation .mark {
-    font-size: 8rem;
+    font-size: 4rem;
+    margin-bottom: 24px;
 }
-
-
 
 /* ============== 頁尾 ============== */
 #foot {
@@ -309,6 +308,7 @@ aside>div {
     background: url('../images/month_12.jpg') no-repeat center center / cover;
 }
 
+/* 雪花 */
 .snow-container {
     position: absolute;
     top: 0;

@@ -104,11 +104,26 @@
 
             <div class="quotation">
                 <div class="mark">
-                    “
+                    <i class="fa-solid fa-quote-left"></i>
                 </div>
                 <div class="quote">
-                    “ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                    the industry's standard dummy text ever since the 1500s”
+                    "<?php
+                        $quotes = [
+                            "New year, new beginnings.",
+                            "Love is in the air.",
+                            "The best way to predict the future is to create it.",
+                            "April showers bring May flowers.",
+                            "The future belongs to those who believe in the beauty of their dreams.",
+                            "Summer is the time to live in the moment.",
+                            "Life isn’t about waiting for the storm to pass, it’s about learning to dance in the rain.",
+                            "Do what you love, and you’ll never work a day in your life.",
+                            "Fall in love with taking care of yourself.",
+                            "Don't wait for the perfect moment. Take the moment and make it perfect.",
+                            "Gratitude turns what we have into enough.",
+                            "End the year with a grateful heart."
+                        ];
+                        echo $quotes[$month-1];
+                    ?>"
                 </div>
             </div>
 
@@ -424,31 +439,31 @@
         init()
 
         document.addEventListener('mousemove', function(event) {
-  // 創建雪花元素
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
+            // 創建雪花元素
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
 
-  // 設置雪花的大小，隨機生成一個 3 到 6 像素的大小
-  const size = Math.random() * 3 + 3;
-  snowflake.style.width = `${size}px`;
-  snowflake.style.height = `${size}px`;
+            // 設置雪花的大小，隨機生成一個 3 到 6 像素的大小
+            const size = Math.random() * 3 + 3;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
 
-  // 設置雪花的初始位置，根據鼠標位置放置
-  snowflake.style.left = `${event.pageX - size / 2}px`;
-  snowflake.style.top = `${event.pageY - size / 2}px`;
+            // 設置雪花的初始位置，根據鼠標位置放置
+            snowflake.style.left = `${event.pageX - size / 2}px`;
+            snowflake.style.top = `${event.pageY - size / 2}px`;
 
-  // 設置雪花掉落的速度，隨機設定
-  const animationDuration = Math.random() * 3 + 2;
-  snowflake.style.animationDuration = `${animationDuration}s`;
+            // 設置雪花掉落的速度，隨機設定
+            const animationDuration = Math.random() * 3 + 2;
+            snowflake.style.animationDuration = `${animationDuration}s`;
 
-  // 將雪花加入到雪花容器中
-  document.querySelector('.snow-container').appendChild(snowflake);
+            // 將雪花加入到雪花容器中
+            document.querySelector('.snow-container').appendChild(snowflake);
 
-  // 在動畫結束後移除雪花
-  snowflake.addEventListener('animationend', function() {
-    snowflake.remove();
-  });
-});
+            // 在動畫結束後移除雪花
+            snowflake.addEventListener('animationend', function() {
+                snowflake.remove();
+            });
+        });
 
     </script>
 
