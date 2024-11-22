@@ -110,12 +110,12 @@
                     "<?php
                         $quotes = [
                             "New year, new beginnings.",
-                            "Love is in the air.",
                             "The best way to predict the future is to create it.",
-                            "April showers bring May flowers.",
+                            "Love is in the air.",
                             "The future belongs to those who believe in the beauty of their dreams.",
-                            "Summer is the time to live in the moment.",
+                            "April showers bring May flowers.",
                             "Life isn’t about waiting for the storm to pass, it’s about learning to dance in the rain.",
+                            "Summer is the time to live in the moment.",
                             "Do what you love, and you’ll never work a day in your life.",
                             "Fall in love with taking care of yourself.",
                             "Don't wait for the perfect moment. Take the moment and make it perfect.",
