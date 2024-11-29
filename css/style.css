@@ -432,21 +432,6 @@ aside>div {
         display: none;
     }
 
-    .timeBox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-    }
-
-    .timeBox * {
-        font-size: 2rem !important;
-    }
-
-    /* .container {
-        max-width: 720px;
-    } */
-
     .buttons {
         height: auto;
 
@@ -467,6 +452,18 @@ aside>div {
 }
 
 @media (max-width: 575px) {
+
+
+    .timeBox * {
+        font-size: 2rem !important;
+    }
+
+    .timeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
 
     .timeBox .day {
         font-size: 3rem;
