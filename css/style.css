@@ -12,6 +12,10 @@ body {
     font-size: 18px;
     font-family: "Roboto", sans-serif;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 a {
@@ -28,18 +32,20 @@ a {
 
 /* ============== 主要 ============== */
 .container {
+    max-width: 1200px;
+    padding: 20px;
     /* background-color: darkorange; */
     border-radius: 16px;
-    height: 720px;
-    width: 72vw;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
-    /* overflow: hidden; */
+    align-items: center;
+    height: 88vh;
 }
 
 main,
 aside {
-    background-color: rgba(255, 255, 255, 0.2);
+    max-height: 76vh;
+    background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(24px);
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -47,8 +53,7 @@ aside {
 
 /* 日歷 */
 main {
-    padding: 16px 0;
-    width: 76%;
+    max-width: 912px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -113,12 +118,8 @@ table th {
     padding: 8px;
 }
 
-#dateTable td {
-    /* padding: 16px; */
-}
-
 caption {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #FFF;
     border-radius: 50px;
     padding: 8px;
@@ -157,11 +158,11 @@ caption {
 
 /* 側邊欄 */
 aside {
-    width: 24%;
+    width: 100%;
     height: 100%;
     margin-right: 16px;
     text-align: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 aside>div {
@@ -213,8 +214,8 @@ aside>div {
     font-size: 0.9rem;
     text-align: center;
     margin-top: 40px;
-    position: fixed;
-    bottom: 0;
+    /* position: fixed; */
+    /* bottom: 0; */
 }
 
 #foot a {
@@ -341,4 +342,162 @@ aside>div {
         /* 垂直方向上的動畫效果 */
         opacity: 0;
     }
+}
+
+/* RWD */
+@media (max-width: 1199px) {
+
+
+    .timeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+
+    :root {
+        font-size: 12px;
+    }
+
+    body {
+        align-items: normal;
+    }
+
+    caption {
+        transform: scale(0.95);
+    }
+
+
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: normal;
+    }
+
+    main {
+        height: auto;
+        padding: 0 0;
+    }
+
+    .buttons {
+        padding: 16px 0 0;
+        align-items: normal;
+        margin: 0 16;
+        margin-top: 16px;
+    }
+
+    table td {
+        height: 5vh;
+    }
+
+    aside {
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 16px;
+        max-width: 912px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    aside .timeBox {
+        font-size: 8px;
+        margin-bottom: 0;
+    }
+
+    .timeBox p {
+        margin: 4px;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .timeBox .day {
+        font-size: 4rem;
+    }
+
+    .timeBox .week {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+
+    aside {
+        justify-content: center
+    }
+
+    .quotation {
+        display: none;
+    }
+
+    .timeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+
+    .timeBox * {
+        font-size: 2rem !important;
+    }
+
+    /* .container {
+        max-width: 720px;
+    } */
+
+    .buttons {
+        height: auto;
+
+    }
+
+    .buttons * {
+        margin-bottom: 16px;
+    }
+
+
+
+    .button {
+        font-size: 1.2rem;
+    }
+
+
+
+}
+
+@media (max-width: 575px) {
+
+    .timeBox .day {
+        font-size: 3rem;
+        font-weight: 900;
+
+    }
+
+    .timeBox .day .ordinal {
+        font-size: 1.5rem;
+    }
+
+    aside {
+        padding: 0;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    th {
+        font-size: 1rem;
+    }
+
+    .buttons * {
+        margin-bottom: 20px;
+    }
+
+    .buttons div:nth-child(2) {
+        order: 3;
+        /* 讓第二個 div 排在第三個位置 */
+    }
+
 }
