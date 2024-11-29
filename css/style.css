@@ -348,12 +348,6 @@ aside>div {
 @media (max-width: 1199px) {
 
 
-    .timeBox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-    }
 
     :root {
         font-size: 12px;
@@ -424,6 +418,17 @@ aside>div {
 
 @media (max-width: 767px) {
 
+    .timeBox * {
+        font-size: 2rem !important;
+    }
+
+    .timeBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+
     aside {
         justify-content: center
     }
@@ -454,16 +459,7 @@ aside>div {
 @media (max-width: 575px) {
 
 
-    .timeBox * {
-        font-size: 2rem !important;
-    }
 
-    .timeBox {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-    }
 
     .timeBox .day {
         font-size: 3rem;
