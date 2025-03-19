@@ -9,7 +9,7 @@
         if (isset($_GET['month'])){
             $month = $_GET['month'];
         } else {
-            $month=date('m');
+            $month=date('n');
         }
 
         if (isset($_GET['year'])){
